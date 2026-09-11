@@ -45,7 +45,7 @@ audioBtn.addEventListener('click', () => {
       audioBtn.innerHTML = '▶ PLAY DEMO';
       $('.audio-progress i').style.transition = 'none';
       $('.audio-progress i').style.width = '0%';
-    }, 6000);
+    }, 6100);
   } else {
     // 3. Pause and reset the audio if the user clicks "STOP" early
     myAudio.pause();
