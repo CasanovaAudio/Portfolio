@@ -21,6 +21,36 @@ $$('.project-card video').forEach(v=>{const card=v.closest('.project-card');card
 
 const menuBtn=$('.menu-btn'), mobileMenu=$('.mobile-menu');menuBtn.addEventListener('click',()=>{const open=mobileMenu.classList.toggle('open');menuBtn.setAttribute('aria-expanded',open);mobileMenu.setAttribute('aria-hidden',!open)});$$('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}));
 
-let audioPlaying=false;const audioBtn=$('[data-audio-toggle]');audioBtn.addEventListener('click',()=>{audioPlaying=!audioPlaying;audioBtn.innerHTML=audioPlaying?'■ STOP DEMO':'▶ PLAY DEMO';$('.audio-progress i').style.transition=audioPlaying?'width 4s linear':'none';$('.audio-progress i').style.width=audioPlaying?'100%':'0%';if(audioPlaying)setTimeout(()=>{audioPlaying=false;audioBtn.innerHTML='▶ PLAY DEMO';$('.audio-progress i').style.transition='none';$('.audio-progress i').style.width='0%'},4100)});
+// let audioPlaying=false;const audioBtn=$('[data-audio-toggle]');audioBtn.addEventListener('click',()=>{audioPlaying=!audioPlaying;audioBtn.innerHTML=audioPlaying?'■ STOP DEMO':'▶ PLAY DEMO';$('.audio-progress i').style.transition=audioPlaying?'width 4s linear':'none';$('.audio-progress i').style.width=audioPlaying?'100%':'0%';if(audioPlaying)setTimeout(()=>{audioPlaying=false;audioBtn.innerHTML='▶ PLAY DEMO';$('.audio-progress i').style.transition='none';$('.audio-progress i').style.width='0%'},4100)});
+
+let audioPlaying = false;
+const audioBtn = $('[data-audio-toggle]');
+
+// 1. Create and reference your .wav file here
+const myAudio = new Audio('Pre_Post_Sample.wav'); 
+
+audioBtn.addEventListener('click', () => {
+  audioPlaying = !audioPlaying;
+  
+  audioBtn.innerHTML = audioPlaying ? '■ STOP DEMO' : '▶ PLAY DEMO';
+  $('.audio-progress i').style.transition = audioPlaying ? 'width 4s linear' : 'none';
+  $('.audio-progress i').style.width = audioPlaying ? '100%' : '0%';
+  
+  if (audioPlaying) {
+    // 2. Play the audio when the button is clicked to start
+    myAudio.play(); 
+    
+    setTimeout(() => {
+      audioPlaying = false;
+      audioBtn.innerHTML = '▶ PLAY DEMO';
+      $('.audio-progress i').style.transition = 'none';
+      $('.audio-progress i').style.width = '0%';
+    }, 4100);
+  } else {
+    // 3. Pause and reset the audio if the user clicks "STOP" early
+    myAudio.pause();
+    myAudio.currentTime = 0; 
+  }
+});
 
 const dot=$('.cursor-dot'),ring=$('.cursor-ring');window.addEventListener('pointermove',e=>{dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px'});$$('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.style.transform='translate(-50%,-50%) scale(1.5)');el.addEventListener('mouseleave',()=>ring.style.transform='translate(-50%,-50%) scale(1)')});
