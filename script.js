@@ -33,7 +33,7 @@ audioBtn.addEventListener('click', () => {
   audioPlaying = !audioPlaying;
   
   audioBtn.innerHTML = audioPlaying ? '■ STOP DEMO' : '▶ PLAY DEMO';
-  $('.audio-progress i').style.transition = audioPlaying ? 'width 4s linear' : 'none';
+  $('.audio-progress i').style.transition = audioPlaying ? 'width 6s linear' : 'none';
   $('.audio-progress i').style.width = audioPlaying ? '100%' : '0%';
   
   if (audioPlaying) {
